@@ -12,7 +12,6 @@ class LogMetricsToAzure(Callback):
         self.learner = learner
 
     def on_epoch_end(self, last_loss, last_metrics, **kwargs):
-        import pdb; pdb.set_trace()
         self.run.log("train_loss", float(last_loss))
         self.run.log("val_loss", float(last_metrics[0]))
         self.run.log("acc", float(last_metrics[1]))
@@ -34,6 +33,7 @@ class CustomSaveModelCallback(Callback):
             self.val_loss = last_metrics[0]
             self.learner.save("bestmodel")
 
+            
 def set_random_seeds(seed):
     np.random.seed(seed)
     random.seed(seed)
